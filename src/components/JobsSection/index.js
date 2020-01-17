@@ -7,13 +7,11 @@ import JobsContainer from "../JobsContainer";
 import JobDetails from "../JobDetails";
 
 const JobsSection = () => {
-  const { isLoading, jobs, error } = useSelector(
-    ({ isLoading, jobs, error }) => ({
-      isLoading,
-      jobs,
-      error
-    })
-  );
+  const data = useSelector(({ isLoading, jobs, error }) => ({
+    isLoading,
+    jobs,
+    error
+  }));
 
   const dispatch = useDispatch();
 
@@ -27,7 +25,7 @@ const JobsSection = () => {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <JobsContainer data={{ jobs, isLoading, error }} />
+            <JobsContainer data={data} />
           </Route>
           <Route path={`/:jobId`}>
             <JobDetails />

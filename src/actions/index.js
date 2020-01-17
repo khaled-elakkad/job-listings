@@ -1,4 +1,4 @@
-import { JOBS } from "../constants";
+import { JOBS, DETAILS } from "../constants";
 
 const loadJobs = () => ({ type: JOBS.LOAD });
 
@@ -9,4 +9,13 @@ const setJobs = jobs => ({
 
 const setError = error => ({ type: JOBS.LOAD_FAILURE, error });
 
-export { loadJobs, setJobs, setError };
+const loadDetails = id => ({ type: DETAILS.LOAD, id });
+
+const setDetails = details => ({
+  type: DETAILS.LOAD_SUCCESS,
+  details
+});
+
+const setDetailError = error => ({ type: DETAILS.LOAD_FAILURE, error });
+
+export { loadJobs, setJobs, setError, loadDetails, setDetails, setDetailError };
