@@ -13,8 +13,6 @@ function* handleJobsLoad() {
     try {
       const page = yield select(getPage);
       const { data, lastPageNum } = yield call(fetchJobs, page);
-      console.log("page", page);
-      console.log("lastPageNum", lastPageNum);
       if (page === lastPageNum) {
         yield put(setLastPage());
       }

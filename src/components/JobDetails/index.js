@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { loadDetails } from "../../actions";
 import { isEmpty } from "../../helpers";
+import ErrorMsg from "../ErrorMsg";
 
 const useStyles = makeStyles(theme => ({
   detailsContainer: {
@@ -49,84 +50,71 @@ const JobDetails = () => {
     details
   }));
 
-  if (isEmpty(details)) return <CircularProgress />;
+  if (isEmpty(details))
+    return (
+      <Box className={classes.detailsContainer}>
+        <CircularProgress />
+      </Box>
+    );
 
   const { isLoading, error, jobDetails } = details;
 
   return (
-    <>
+    <Box className={classes.detailsContainer}>
+      {isLoading && <CircularProgress />}
+      {error && <ErrorMsg error={error} />}
       {jobDetails && (
-        <Box className={classes.detailsContainer}>
-          {isLoading && <CircularProgress />}
-          {error && "error"}
-          <Card className={classes.card}>
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Job Title
-              </Typography>
-              <Typography
-                variant="body2"
-                component="p"
-                className={classes.value}
-              >
-                {jobDetails.title}
-              </Typography>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Description
-              </Typography>
-              <Typography
-                variant="body2"
-                component="p"
-                className={classes.value}
-              >
-                {jobDetails.description}
-              </Typography>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Employment Type
-              </Typography>
-              <Typography
-                variant="body2"
-                component="p"
-                className={classes.value}
-              >
-                {jobDetails.employment_type}
-              </Typography>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Location
-              </Typography>
-              <Typography
-                variant="body2"
-                component="p"
-                className={classes.value}
-              >
-                {jobDetails.location}
-              </Typography>
-            </CardContent>
-            <CardActions className={classes.actions}>
-              <Button variant="contained" size="small" onClick={() => goBack()}>
-                Back to the other jobs
-              </Button>
-            </CardActions>
-          </Card>
-        </Box>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              Job Title
+            </Typography>
+            <Typography variant="body2" component="p" className={classes.value}>
+              {jobDetails.title}
+            </Typography>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              Description
+            </Typography>
+            <Typography variant="body2" component="p" className={classes.value}>
+              {jobDetails.description}
+            </Typography>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              Employment Type
+            </Typography>
+            <Typography variant="body2" component="p" className={classes.value}>
+              {jobDetails.employment_type}
+            </Typography>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              Location
+            </Typography>
+            <Typography variant="body2" component="p" className={classes.value}>
+              {jobDetails.location}
+            </Typography>
+          </CardContent>
+          <CardActions className={classes.actions}>
+            <Button variant="contained" size="small" onClick={() => goBack()}>
+              Back to the other jobs
+            </Button>
+          </CardActions>
+        </Card>
       )}
-    </>
+    </Box>
   );
 };
 
