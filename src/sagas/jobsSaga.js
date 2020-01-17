@@ -2,17 +2,26 @@ import { takeEvery, select, call, put } from "redux-saga/effects";
 
 import { JOBS } from "../constants";
 import { fetchJobs } from "../api";
-import { setJobs, setError } from "../actions";
+import { setJobs, setError, setLastPage } from "../actions";
 
 const getPage = state => state.nextPage;
+const getLastPage = state => state.lastPage;
 
 function* handleJobsLoad() {
-  try {
-    const page = yield select(getPage);
-    const jobs = yield call(fetchJobs, page);
-    yield put(setJobs(jobs));
-  } catch (error) {
-    yield put(setError(error.toString()));
+  const lastPage = yield select(getLastPage);
+  if (!lastPage) {
+    try {
+      const page = yield select(getPage);
+      const { data, lastPageNum } = yield call(fetchJobs, page);
+      console.log("page", page);
+      console.log("lastPageNum", lastPageNum);
+      if (page === lastPageNum) {
+        yield put(setLastPage());
+      }
+      yield put(setJobs(data));
+    } catch (error) {
+      yield put(setError(error.toString()));
+    }
   }
 }
 

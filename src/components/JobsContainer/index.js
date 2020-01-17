@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, CircularProgress } from "@material-ui/core";
 
 import { loadJobs } from "../../actions";
@@ -7,6 +7,10 @@ import JobItem from "../JobItem";
 
 const JobsContainer = ({ data: { jobs, isLoading, error } }) => {
   const dispatch = useDispatch();
+
+  const { lastPage } = useSelector(({ lastPage }) => ({
+    lastPage
+  }));
 
   return (
     <Box p={3}>
@@ -17,7 +21,9 @@ const JobsContainer = ({ data: { jobs, isLoading, error } }) => {
       {error && "error"}
 
       <Box display="flex" justifyContent="center" m={2}>
-        {isLoading ? (
+        {lastPage ? (
+          "No more jobs for you!"
+        ) : isLoading ? (
           <CircularProgress />
         ) : (
           <Button
