@@ -1,5 +1,31 @@
 # Job Listings App
 
+## Instructions
+
+1. Install globally [json-server](https://www.npmjs.com/package/json-server)
+
+```terminal
+yarn global add json-server
+```
+
+2. Clone repo
+
+```terminal
+git clone https://github.com/khaled-elakkad/job-listings.git
+```
+
+3. Install dependencies
+
+```terminal
+yarn
+```
+
+4. Run locally in development mode
+
+```terminal
+yarn dev
+```
+
 ## Tools Used
 
 1. create-react-app

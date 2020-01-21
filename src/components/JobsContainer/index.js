@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
 import { Box, Button, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -49,6 +51,22 @@ const JobsContainer = ({ data: { jobs, isLoading, error } }) => {
       </Box>
     </Box>
   );
+};
+
+JobsContainer.propTypes = {
+  data: PropTypes.shape({
+    jobs: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        description: PropTypes.string,
+        employment_type: PropTypes.string,
+        location: PropTypes.string
+      })
+    ),
+    isLoading: PropTypes.bool,
+    error: PropTypes.string
+  })
 };
 
 export default JobsContainer;

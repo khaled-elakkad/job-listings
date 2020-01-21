@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ErrorMsg({ error }) {
+const ErrorMsg = ({ error }) => {
   const classes = useStyles();
 
   return (
@@ -23,4 +24,10 @@ export default function ErrorMsg({ error }) {
       <Box className={classes.message}>{error}</Box>
     </Box>
   );
-}
+};
+
+ErrorMsg.propTypes = {
+  error: PropTypes.string.isRequired
+};
+
+export default ErrorMsg;

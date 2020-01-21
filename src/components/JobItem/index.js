@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
   }
 });
 
-const JobItem = ({ data: { id, title, description, employment_type } }) => {
+const JobItem = ({ data: { id, title, description } }) => {
   const classes = useStyles();
   const { push } = useHistory();
 
@@ -66,6 +67,14 @@ const JobItem = ({ data: { id, title, description, employment_type } }) => {
       </CardActions>
     </Card>
   );
+};
+
+JobItem.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string
+  })
 };
 
 export default JobItem;
